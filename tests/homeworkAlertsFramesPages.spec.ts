@@ -48,16 +48,18 @@ test ("Exercise 5", async ({ page }) => {
 
 });
 
-test ("Exercise 6", async ({ page }) => {
+test ("Exercise six", async ({ page }) => {
     await page.goto("https://testing.qaautomationlabs.com/iframe.php");
     // Click the First Frame
-    const firstIframe = page.frameLocator("#frame1");
-    const firstButton = firstIframe.getByRole("button", {name:"CLick Me"});
-    await firstButton.click();
-    const firstIframeText = await firstIframe.locator("#message").textContent();
+    const firstIframe = page.frameLocator("[src='iframe1.php']");
+    await firstIframe.locator("//button[text()='CLick Me']").click();
+    const firstIframeText = await page.locator("//p[contains(text(),'iframe 1')]").textContent();
     console.log(`First Text: ${firstIframeText}`);
     // Click the Second Frame
-
+    const secondIframe = page.frameLocator("[src='iframe2.php']");
+    await secondIframe.locator("//button[text()='Click Me']").click();
+    const secondIframeText = await page.locator("//p[contains(text(),'iframe 2')]").textContent();
+    console.log(`Second Text: ${secondIframeText}`);
 
 });
 
